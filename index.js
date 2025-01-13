@@ -1,6 +1,7 @@
 const express = require("express");
 const connectDB = require("./db/connection");
 const articleRoutes = require("./routes/articles");
+const creatorRoutes = require("./routes/creators"); // Import creator routes
 const cors = require("cors");
 
 const app = express();
@@ -15,8 +16,12 @@ app.use(cors());
 
 // Routes
 app.use("/api/articles", articleRoutes);
-app.use("/api/creator", articleRoutes);
+app.use("/api/creators", creatorRoutes); // Corrected route for creators
 
+// Default route
+app.get("/", (req, res) => {
+  res.send("Welcome to the API!");
+});
 
 // Start Server
 app.listen(PORT, () => {
